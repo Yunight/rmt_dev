@@ -52,7 +52,7 @@ const submitHandler = async event => {
         const { jobItems } = data;
 
         //update state
-        state.searchJobItem = jobItems;
+        state.searchJobItems = jobItems;
         state.currentPage = 1;
 
         //remove spinner

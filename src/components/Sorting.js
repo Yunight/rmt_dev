@@ -37,12 +37,12 @@ const clickHandler = event => {
 
     //sort the job items 
     if (recent) {
-        state.searchJobItem.sort((a, b) => {
+        state.searchJobItems.sort((a, b) => {
             return a.daysAgo - b.daysAgo;
         });
 
     } else {
-        state.searchJobItem.sort((a, b) => {
+        state.searchJobItems.sort((a, b) => {
             return b.relevanceScore - a.relevanceScore;
         });
     }

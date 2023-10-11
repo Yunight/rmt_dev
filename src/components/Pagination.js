@@ -20,7 +20,7 @@ const renderPaginationButtons = () => {
     }
 
     //display next button if there are more job items on next page
-    if ((state.searchJobItem.length - state.currentPage * RESULTS_PER_PAGE) <= 0) {
+    if ((state.searchJobItems.length - state.currentPage * RESULTS_PER_PAGE) <= 0) {
         paginationBtnNextEl.classList.add('pagination__button--hidden');
     } else {
         paginationBtnNextEl.classList.remove('pagination__button--hidden');
