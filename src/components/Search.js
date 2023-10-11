@@ -5,6 +5,7 @@ import {
     numberEl,
     BASE_URL_API,
     getData,
+    state
 } from "../common.js"
 
 import renderError from "./Error.js";
@@ -43,6 +44,9 @@ const submitHandler = async event => {
 
         const { jobItems } = data;
 
+        //update state
+        state.searchJobItem = jobItems;
+
         //remove spinner
         renderSpinner('search');
 
@@ -50,7 +54,7 @@ const submitHandler = async event => {
         numberEl.textContent = jobItems.length;
 
         //render job items in search job list
-        renderJobList(jobItems);
+        renderJobList();
 
     } catch (error) {
         renderSpinner('search');
