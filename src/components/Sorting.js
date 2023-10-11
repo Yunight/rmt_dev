@@ -6,6 +6,7 @@ import {
 } from "../common.js";
 
 import renderJoblist from './JobList.js';
+import renderPaginationButtons from './Pagination.js';
 
 const clickHandler = event => {
 
@@ -16,6 +17,10 @@ const clickHandler = event => {
 
     //stop if not clicked button element
     if (!clickedButtonEl) return;
+
+    //update current state to 1
+
+    state.currentPage = 1;
 
     //check if intention is recent or relevant sorting
 
@@ -41,6 +46,9 @@ const clickHandler = event => {
             return b.relevanceScore - a.relevanceScore;
         });
     }
+
+    //reset pagination buttons;
+    renderPaginationButtons();
 
     //render jobitems in list
     renderJoblist();

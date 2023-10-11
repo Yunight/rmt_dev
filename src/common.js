@@ -1,11 +1,13 @@
 // CONSTANTS
 export const BASE_URL_API = 'https://bytegrad.com/course-assets/js/2/api';
 export const DEFAULT_DISPLAY_TIME = 3500;
+export const RESULTS_PER_PAGE = 7;
 
 // STATE 
 
 export const state = {
     searchJobItem: [],
+    currentPage: 1,
 }
 
 // SELECTORS
