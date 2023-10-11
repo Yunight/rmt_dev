@@ -8,11 +8,16 @@ import {
 import renderSpinner from './Spinner.js';
 import renderJobDetails from './JobDetails.js';
 import renderError from './Error.js';
+import renderJobList from './JobList.js';
 
 const loadHashChangeHandler = async () => {
     //get id from url
     const id = location.hash.substring(1);
     if (id) {
+
+        //remove the active class from previously active job item
+        document.querySelectorAll('.job-item--active').forEach(jobItemWithActiveClass => jobItemWithActiveClass.classList.remove('job-item--active'));
+
         //remove previous job details content
         jobDetailsContentEl.innerHTML = '';
 
@@ -26,6 +31,9 @@ const loadHashChangeHandler = async () => {
 
             //update store
             state.activeJobItem = jobItem;
+
+            //render earch job list
+            renderJobList();
 
             //remove spinners
             renderSpinner('job-details');

@@ -44,7 +44,7 @@ const renderJobList = (whichJobList = 'search') => {
                     </div>
                 </div>
                 <div class="job-item__right">
-                    <i class="fa-solid fa-bookmark job-item__bookmark-icon"></i>
+                    <i class="fa-solid fa-bookmark job-item__bookmark-icon  ${state.bookmarkJobItems.some(bookmarkJobItem => bookmarkJobItem.id === jobItem.id) && 'job-item__bookmark-icon--bookmarked'}"></i>
                     <time class="job-item__time">${jobItem.daysAgo}d</time>
                 </div>
             </a>
@@ -64,15 +64,9 @@ const clikcHandler = async event => {
     const jobItemEl = event.target.closest('.job-item');
 
     //remove the active class from previously active job item
-
     document.querySelectorAll('.job-item--active').forEach(jobItemWithActiveClass => jobItemWithActiveClass.classList.remove('job-item--active'));
 
-
-    //add active class
-    jobItemEl.classList.add('job-item--active');
-
     //empty the job details section
-
     jobDetailsContentEl.innerHTML = '';
 
     //render spinner
@@ -85,6 +79,9 @@ const clikcHandler = async event => {
     const allJobItems = [...state.searchJobItems, ...state.bookmarkJobItems];
     // update state 
     state.activeJobItem = allJobItems.find(jobItem => jobItem.id === +id);
+
+    //render search job list again
+    renderJobList();
 
     //add it to url
     history.pushState(null, '', `/#${id}`);
