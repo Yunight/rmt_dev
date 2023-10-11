@@ -4,19 +4,31 @@ import {
     BASE_URL_API,
     getData,
     state,
-    RESULTS_PER_PAGE
+    RESULTS_PER_PAGE,
+    jobListBookmarksEl,
 } from '../common.js';
 
 import renderError from "./Error.js";
 import renderSpinner from './Spinner.js';
 import renderJobDetails from './JobDetails.js';
 
-const renderJobList = () => {
+const renderJobList = (whichJobList = 'search') => {
+
+    //determine correct selector for job list ( search / results list or bookmarks list )
+    const jobListEl = whichJobList === 'search' ? jobListSearchEl : jobListBookmarksEl;
 
     //remove previous job items
-    jobListSearchEl.innerHTML = '';
+    jobListEl.innerHTML = '';
 
-    state.searchJobItems.slice(state.currentPage * RESULTS_PER_PAGE - RESULTS_PER_PAGE, state.currentPage * RESULTS_PER_PAGE).forEach(jobItem => {
+    //determine the job items that should be rendered
+    let jobItems;
+    if (whichJobList === 'search') {
+        jobItems = state.searchJobItems.slice(state.currentPage * RESULTS_PER_PAGE - RESULTS_PER_PAGE, state.currentPage * RESULTS_PER_PAGE)
+    } else if (whichJobList === 'bookmarks') {
+        jobItems = state.bookmarkJobItems
+    }
+
+    jobItems.forEach(jobItem => {
 
         const newJobItemHTML = ` 
         <li class="job-item ${state.activeJobItem.id === jobItem.id ? 'job-item--active' : ''}">
@@ -39,7 +51,7 @@ const renderJobList = () => {
         </li>
         `;
 
-        jobListSearchEl.insertAdjacentHTML('beforeend', newJobItemHTML);
+        jobListEl.insertAdjacentHTML('beforeend', newJobItemHTML);
     }
     );
 }
@@ -53,7 +65,7 @@ const clikcHandler = async event => {
 
     //remove the active class from previously active job item
 
-    document.querySelector('.job-item--active')?.classList.remove('job-item--active');
+    document.querySelectorAll('.job-item--active').forEach(jobItemWithActiveClass => jobItemWithActiveClass.classList.remove('job-item--active'));
 
 
     //add active class
@@ -92,6 +104,7 @@ const clikcHandler = async event => {
 }
 
 jobListSearchEl.addEventListener('click', clikcHandler)
+jobListBookmarksEl.addEventListener('click', clikcHandler)
 
 
 export default renderJobList;

@@ -6,3 +6,4 @@ import './src/components/Spinner.js';
 import './src/components/Sorting.js';
 import './src/components/Pagination.js';
 import './src/components/Router.js';
+import './src/components/Bookmarks.js';
