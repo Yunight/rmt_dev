@@ -58,7 +58,7 @@ const renderJobDetails = (jobItem) => {
     </div>
     
     <footer class="job-details__footer">
-        <p class="job-details__footer-text">If possible, please reference that you found the job on <span class="u-bold">rmtDev</span>, we would really appreciate it!</p>
+        <p class="job-details__footer-text">If possible, please reference that you found the job on <span class="u-bold">Benchi-CHEN.com</span>, we would really appreciate it!</p>
     </footer>`;
     jobDetailsContentEl.innerHTML = jobDetailHTML;
 }
